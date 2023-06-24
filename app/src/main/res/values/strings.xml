@@ -28,4 +28,8 @@
     <string name="gender">Gender</string>
     <string name="birthday">Birthday</string>
     <string name="address">Address</string>
+    <string name="edit_my_profile">Edit My Profile</string>
+    <string name="full_name">Full name</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
 </resources>

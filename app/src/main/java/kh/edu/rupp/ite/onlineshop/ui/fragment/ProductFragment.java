@@ -20,6 +20,7 @@ import kh.edu.rupp.ite.onlineshop.api.model.Product;
 import kh.edu.rupp.ite.onlineshop.api.service.ApiService;
 import kh.edu.rupp.ite.onlineshop.databinding.FragmentProductBinding;
 import kh.edu.rupp.ite.onlineshop.ui.adapter.ProductAdapter;
+import kh.edu.rupp.ite.onlineshop.ui.adapter.ProductAdapterVBox;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -83,13 +84,12 @@ public class ProductFragment extends Fragment {
     private void showProductList(List<Product> productList) {
 
         // Create Layout Manager
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
         binding.recycleViewProduct.setLayoutManager(layoutManager);
 
         // Create Adapter
-        ProductAdapter adapter = new ProductAdapter();
+        ProductAdapterVBox adapter = new ProductAdapterVBox();
         adapter.submitList(productList);
         binding.recycleViewProduct.setAdapter(adapter);
-
     }
 }

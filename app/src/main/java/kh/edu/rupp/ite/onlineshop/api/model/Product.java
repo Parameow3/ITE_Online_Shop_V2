@@ -10,7 +10,7 @@ public class Product {
     private int price;
     @SerializedName("image-url")
     private String imgUrl;
-    private double rating;
+    private String rating;
 
     public int getId() {
         return id;
@@ -36,7 +36,7 @@ public class Product {
         return imgUrl;
     }
 
-    public double getRating() {
+    public String getRating() {
         return rating;
     }
 

@@ -64,9 +64,11 @@
         </LinearLayout>
 
         <ImageView
+            android:id="@+id/editProfile"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:src="@drawable/ic_profile_edit_foreground" />
+            android:src="@drawable/ic_profile_edit_foreground"
+            />
 
     </LinearLayout>
 

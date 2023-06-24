@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tool="http://schemas.android.com/tools"
+    android:layout_width="188dp"
+    android:layout_height="256dp"
+    android:layout_marginTop="16dp"
+    android:orientation="vertical">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="188dp"
+        app:cardCornerRadius="12dp">
+
+        <ImageView
+            android:id="@+id/imgProduct"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </androidx.cardview.widget.CardView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/priceProduct"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingHorizontal="8dp"
+            android:textColor="#014164"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            tool:text="$250.00" />
+
+        <TextView
+            android:id="@+id/ratingProduct"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:textSize="16sp"
+            app:drawableStartCompat="@drawable/ic_star_foreground"
+            tool:text="4.8" />
+
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/nameProduct"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="4dp"
+        android:layout_weight="1"
+        android:paddingHorizontal="8dp"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        tool:text="This is my beloved product that cute" />
+
+
+</LinearLayout>

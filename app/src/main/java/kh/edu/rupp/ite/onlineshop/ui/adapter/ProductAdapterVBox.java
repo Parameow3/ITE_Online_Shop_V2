@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 
 import kh.edu.rupp.ite.onlineshop.api.model.Product;
-import kh.edu.rupp.ite.onlineshop.databinding.ViewHolderProductBinding;
+import kh.edu.rupp.ite.onlineshop.databinding.ViewHolderProductVboxBinding;
 import kh.edu.rupp.ite.onlineshop.databinding.ViewHolderProfileVboxBinding;
 
 public class ProductAdapterVBox extends ListAdapter<Product, ProductAdapterVBox.ProductViewHolder> {
@@ -40,7 +40,7 @@ public class ProductAdapterVBox extends ListAdapter<Product, ProductAdapterVBox.
     public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        ViewHolderProfileVboxBinding binding = ViewHolderProfileVboxBinding.inflate(layoutInflater, parent, false);
+        ViewHolderProductVboxBinding binding = ViewHolderProductVboxBinding.inflate(layoutInflater, parent, false);
 
         return new ProductViewHolder(binding);
     }
@@ -56,9 +56,10 @@ public class ProductAdapterVBox extends ListAdapter<Product, ProductAdapterVBox.
     }
 
     public static class ProductViewHolder extends RecyclerView.ViewHolder {
-        ViewHolderProfileVboxBinding itemBinding;
+        ViewHolderProductVboxBinding itemBinding;
 
-        public ProductViewHolder(ViewHolderProfileVboxBinding itemBinding) {
+
+        public ProductViewHolder(ViewHolderProductVboxBinding itemBinding) {
             super(itemBinding.getRoot());
             this.itemBinding = itemBinding;
         }
@@ -74,6 +75,9 @@ public class ProductAdapterVBox extends ListAdapter<Product, ProductAdapterVBox.
             // bind product price to recycle view
             DecimalFormat df = new DecimalFormat("$#.00");
             itemBinding.priceProduct.setText(df.format(product.getPrice()));
+
+            // bind product rating to recycle view
+            itemBinding.ratingProduct.setText(product.getRating());
         }
 
     }

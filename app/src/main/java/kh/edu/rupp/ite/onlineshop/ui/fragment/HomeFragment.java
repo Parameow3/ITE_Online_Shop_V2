@@ -11,14 +11,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import java.util.List;
 
 import kh.edu.rupp.ite.onlineshop.api.model.Product;
 import kh.edu.rupp.ite.onlineshop.api.service.ApiService;
 import kh.edu.rupp.ite.onlineshop.databinding.FragmentHomeBinding;
-import kh.edu.rupp.ite.onlineshop.ui.adapter.ProductAdapter;
 import kh.edu.rupp.ite.onlineshop.ui.adapter.ProductAdapterVBox;
 import retrofit2.Call;
 import retrofit2.Callback;

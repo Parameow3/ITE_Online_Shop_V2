@@ -1,17 +1,14 @@
-package kh.edu.rupp.ite.onlineshop.ui.fragment;
+package kh.edu.rupp.ite.onlineshop.ui.activity;
+
+import static java.security.AccessController.getContext;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.squareup.picasso.Picasso;
 
@@ -19,46 +16,36 @@ import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Objects;
 
+import kh.edu.rupp.ite.onlineshop.R;
 import kh.edu.rupp.ite.onlineshop.api.model.Profile;
 import kh.edu.rupp.ite.onlineshop.api.service.ApiService;
-import kh.edu.rupp.ite.onlineshop.databinding.FragmentProfileBinding;
-import kh.edu.rupp.ite.onlineshop.ui.activity.ProfileEditActivity;
+import kh.edu.rupp.ite.onlineshop.databinding.ActivityProfileEditBinding;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class ProfileFragment extends Fragment {
+public class ProfileEditActivity extends AppCompatActivity {
 
-    private FragmentProfileBinding binding;
-
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-        binding = FragmentProfileBinding.inflate(inflater, container, false);
-        return binding.getRoot();
-
-    }
-
-
+    private ActivityProfileEditBinding binding;
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-        // load profile from server (api)
+        binding = ActivityProfileEditBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
         loadProfileFromServer();
 
-        binding.editProfile.setOnClickListener(v -> startProfileEditActivity());
+        binding.backButton.setOnClickListener(v -> startLandingActivity());
     }
 
-    private void startProfileEditActivity() {
-        Intent intent = new Intent(this.getContext(), ProfileEditActivity.class);
+    private void startLandingActivity() {
+        Intent intent = new Intent(this, LandingActivity.class);
         startActivity(intent);
     }
 
@@ -80,7 +67,7 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onResponse(Call<Profile> call, Response<Profile> response) {
                 if (response.isSuccessful()) {
-                    Toast.makeText(getContext(), "Load Profile Successful!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ProfileEditActivity.this, "Load Profile Successful!", Toast.LENGTH_LONG).show();
                     try {
                         showProfile(response.body());
                     } catch (ParseException e) {
@@ -88,13 +75,13 @@ public class ProfileFragment extends Fragment {
                     }
 
                 } else {
-                    Toast.makeText(getContext(), "Load Profile failed!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ProfileEditActivity.this, "Load Profile failed!", Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
             public void onFailure(Call<Profile> call, Throwable t) {
-                Toast.makeText(getContext(), "Load Profile failed!", Toast.LENGTH_LONG).show();
+                Toast.makeText(ProfileEditActivity.this, "Load Profile failed!", Toast.LENGTH_LONG).show();
                 Log.e("[ProfileFragment]", "Load Profile failed: " + t.getMessage());
             }
         });
@@ -102,21 +89,13 @@ public class ProfileFragment extends Fragment {
 
     @SuppressLint("SetTextI18n")
     private void showProfile(Profile profile) throws ParseException {
-        // set image to view
-        Picasso.get().load(profile.getImgUrl()).into(binding.imgProfile);
 
         // set full name to Imageview
-        binding.txtFullName.setText(profile.getFirst_name() + " " + profile.getLast_name());
-
-        // set email to Textview
-        binding.txtEmail.setText(profile.getEmail());
+        binding.fullName.setText(profile.getFirst_name() + " " + profile.getLast_name());
 
         // set email to EditText
         binding.txtEditEmail.setText(profile.getEmail());
 
-        // set phone number to edittext
-        DecimalFormat df = new DecimalFormat("##,###,###");
-        binding.txtEditPhoneNum.setText("0" + df.format(Integer.valueOf(profile.getPhoneNum())).replaceAll(",", " "));
 
         // set gender to edittext
         binding.txtEditGender.setText(profile.getGender());
